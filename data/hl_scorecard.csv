@@ -1,0 +1,12 @@
+card_no,origin,execution,result,r_multiple,note_short
+DESK-1,DESK,PAPER,SCRATCH,-0.06,range-high fade filled but showed no follow-through; closed by desk decision before stop or target
+DESK-3,CES,VETOED,,,long idea vetoed; price later broke the range low so the veto is tracking as a save; grades at 30d
+DESK-2+4,DESK,PAPER,LOSS,-1.3,"pair converted to an outright long at the trigger close, the breakout failed within 48h and it was scratched"
+DESK-5,DESK,PAPER,MISS,,resting oil bid never filled while the market ran 12 percent; bid placed too deep
+DESK-6,DESK,PAPER,MISS,,second consecutive too-deep oil bid; cancelled unfilled and replaced with a market entry card
+CES-1,CES,OFFERED,,,market-entry oil long spec offered but not taken; its stop survived the dump by a small margin; grades at 7d
+DESK-7,DESK,PAPER,LOSS,-1.0,paper oil long stopped on a ceasefire-headline dump; the card's own headline-risk warning was the kill
+DESK-7,CES,REAL,LOSS,-1.0,"real oil long stopped at the resting stop; exact fill price pending confirmation, slippage likely"
+DESK-8,DESK,PAPER,,,failed-breakout BTC short open with stop and half target resting
+DESK-8,CES,REAL,,,real execution of the BTC short open with both exits resting
+CES-5,CES,VETOED,,,event trade vetoed for an empty order book; baseline logged for counterfactual grading

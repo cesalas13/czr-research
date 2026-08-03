@@ -1,0 +1,24 @@
+coin,ca,side,entry_mcap_usd,opened_at,size_note,stop_mcap_usd,target_mcap_usd,exit_mcap_usd,result,outcome_grade,reasoning_grade,status
+CASHCAT,,SHORT,168500000,2026-07-12,R3 $2000 conviction short; asterisked non-deployable (chain has no shorting),175000000,157000000,156250000,+105,A,A,closed
+HOPPY,,LONG,1060000,2026-07-12,R3 $250 resting bid on the -22% dip,750000,1600000,1889000,+192,A,A,closed
+Guy (Little Guy),,LONG,960000,2026-07-12,"R3 $500 resting bid, filled into a -24%/h1 slide during an anchor cascade",750000,,742500,-113,F,C,closed
+CASHCAT,,LONG,157600000,2026-07-12,"R3 $1000 rung 1, air-pocket flush fill",147000000,172000000,163950000,+36,B+,A,closed
+VEX,,LONG,7310000,2026-07-12,"R3 $500 full-green market entry, regime-halved",5900000,9500000,5840000,-101,F,C,closed
+VEX,,LONG,6560000,2026-07-12,"R3 $250 structure re-entry ticket, whip-sized stop",4800000,9500000,4752000,-69,F,C+,closed
+DATABEAR,,LONG,1293000,2026-07-12,"R3 $250 rung 1, farmed-range lower band",1050000,2200000,1040000,-48,F,B,closed
+DATABEAR,,LONG,1212000,2026-07-12,R3 $250 rung 2,1050000,2200000,1040000,-36,F,B,closed
+HYPERIUM,,LONG,2296000,2026-07-12,"R3 $500 regime-halved, verified-agent thesis",1750000,4000000,1750000,-128,F,B,closed
+SWOOD,,LONG,244000,2026-07-12,R3 $500 shipped-product-floor position,244000,340000,292000,+103,,,closed
+CASHCAT,,LONG,158600000,2026-07-12,"R3 $1000 tokenization-event conviction bid, regime-halved",147000000,172000000,145500000,-83,,,closed
+GME,0x7e86381A763F0Ecca2bDF27C54eAC403ddD48123,LONG,,,"R3 $500 resting ticket placed 07-12; token collapsed, fill and stop printed in a dark window, adjudicated conservatively",2300000,4600000,,"-40 (adjudicated, path unverifiable)",,,closed
+MARIAN,,LONG,3180000,2026-07-12,"R3 $1000 both rungs, avg effective entry",2700000,4500000,,"half banked +208 at 4.5M tier, runner riding",,,open
+WALLET,,LONG,,,"R3 $500 resting ticket 3.00-3.10M under the wash; unfilled, unadjudicated after dark window",2400000,5000000,,,,,open
+RIBBIT,,LONG,,,"R3 $500 reserved, trigger-entry only by design, no resting bid",,,,,,,open
+CASHCAT,,LONG,157300000,2026-07-12,"R2 $1500 deep-structure bid, filled at the second-flush print",147000000,172000000,147000000,-113,,,closed
+MARIAN,,LONG,,,R2 $750 deeper-rung bid at 3.05M only; boundary-whip fill held unfilled pending a clean print,2700000,4500000,,,,,open
+VIRTUAL,,LONG,,,"R2 $750 allocation bid 2.80-2.90M, unfilled; allocation, no stop",,4000000,,,,,open
+HYPERIUM,,LONG,1760000,2026-07-12,"R4 $250 dabble, funnel-confirmed wave-2",1150000,2300000,,"peaked +48 percent unscaled, mark ~flat",,,open
+DATABEAR,,LONG,1313000,2026-07-12,R4 $560 band-trade (75% sizing through warning),1020000,,1010000,-132,F,B,closed
+HOPPY,,LONG,,,"R4 $560 re-entry bid at 1.70M, assumed unfilled",1250000,2500000,,,,,open
+VEX,,LONG,6560000,2026-07-12,R4 $375 structure mirror of the R3 ticket at 1.5x,4800000,9500000,4752000,-103,,,closed
+CASHCAT,,LONG,157300000,2026-07-12,R4 $2250 bid (75% sizing through warning),147000000,172000000,147000000,-169,,,closed

@@ -1,0 +1,15 @@
+placed_at,lane,venue,question,side,market_price,stake_units,outcome,market_type
+2026-06-30T00:00:00Z,claude,robinhood,Netherlands to advance vs Morocco (R32),yes,0.6,,lost,advance
+2026-07-02T00:00:00Z,claude,robinhood,"Under 2.5 total goals, Portugal vs Croatia (R32)",yes,0.48,,void,total
+2026-07-02T00:00:00Z,claude,robinhood,"Both teams to score, Switzerland vs Algeria (R32)",yes,0.54,,lost,btts
+2026-07-03T00:00:00Z,claude,kalshi,Colombia to win in regulation vs Ghana (R32),yes,0.65,,open,moneyline
+2026-07-03T00:00:00Z,claude,kalshi,"Under 2.5 total goals, Argentina vs Cape Verde (R32)",yes,0.42,,won,total
+2026-07-04T00:00:00Z,claude,robinhood,"France -1.5 (win by 2+), Paraguay vs France (R16)",yes,,0.67,lost,handicap
+2026-07-04T00:00:00Z,ces,robinhood,"Mbappe anytime goalscorer, Paraguay vs France (R16)",yes,,1.33,won,prop
+2026-07-05T00:00:00Z,ces,robinhood,Mexico moneyline (regulation) vs England (R16),yes,,,lost,moneyline
+2026-07-05T00:00:00Z,claude,book,"Both teams to score, Brazil vs Norway (R16)",yes,,,won,btts
+2026-07-05T00:00:00Z,claude,book,Norway +0.75 Asian Handicap vs Brazil (R16),yes,0.56,,won,handicap
+2026-07-06T00:00:00Z,claude,book,Spain moneyline (90 min) vs Portugal (R16),yes,0.524,,won,moneyline
+2026-07-07T00:00:00Z,claude,kalshi,"Under 2.5 total goals (No on 3+ goals), Argentina vs Egypt (R16)",yes,,,lost,total
+2026-07-07T00:00:00Z,claude,kalshi,"Under 2.5 total goals (No on 3+ goals), Switzerland vs Colombia (R16)",yes,0.65,,void,total
+2026-07-08T00:00:00Z,claude,kalshi,"Morocco +1.5 (No on France wins by 2+), France vs Morocco (QF)",yes,,,open,handicap

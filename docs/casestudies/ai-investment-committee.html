@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I built an AI investment committee and graded its decisions | Cesar Salas Research</title>
+<meta name="description" content="An AI investment committee built on structured disagreement, graded against a human lane.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><a class="wordmark" href="../index.html">Cesar Salas<span class="wordmark-tag">Research</span></a><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#case-studies" class="active">Case studies</a><a href="../memos/index.html">Memos</a><a href="../map/market-map.html">Market map</a><a href="mailto:cesalas13@gmail.com">Contact</a></nav></div></header>
+<main class="article"><article><p class="kicker">Case study</p><h1>I built an AI investment committee and graded its decisions</h1><p>I wanted to know whether a crew of LLM agents, forced to disagree with each other before deciding, could produce better calibrated calls than a single confident model or a human running on gut. So I built one, pointed it at live prediction markets during the World Cup, logged every verdict to a ledger, and graded the results against my own picks on the same games. This writeup covers the design, the numbers, and what actually transferred.</p>
+<h2>Why structured disagreement</h2>
+<p>Real investment committees do not work because the partners are individually brilliant. They work because the process institutionalizes tension: someone owns the bull case, someone owns the bear case, and a decision maker has to resolve the conflict on the record before capital moves. The failure mode of a solo analyst (or a solo LLM) is the same one: a coherent story that was never stress tested, so confidence and correctness drift apart. I mapped that structure directly onto agents. Every thesis gets a FOR advocate and an AGAINST advocate who argue from the same evidence, a synthesizer who must name where they disagreed, and a mechanical risk gate that can kill the trade no matter how good the story sounds. The point is not that any one agent is smart. The point is that no single narrative gets to walk to the ledger unopposed.</p>
+<h2>Architecture</h2>
+<p>Two systems fed this. The first is a set of role agents modeled on a full trading firm: bull and bear researchers who must engage each other's counterpoints directly, a research manager who synthesizes the debate into a plan, a trader who converts it to a concrete proposal, then a second debate layer where aggressive, conservative, and neutral risk debators attack the proposal itself, and a portfolio manager who makes the final call. That taught me the pattern. The second system, pm-crew, is the production version I actually graded: a six stage pipeline against my local prediction market terminal, which aggregates live Polymarket and Kalshi data.</p>
+<pre class="diagram">SCOUT (deterministic filter: liquidity, price 3c-97c,
+       closes within 7 days, not already on the board)
+   |
+   v
+ANALYST CREW (per candidate, parallel)
+   FOR advocate  --+
+   AGAINST advocate --+--&gt; SYNTHESIZER -&gt; calibrated P(yes)
+   [news analyst, only if the advocates split by &gt;0.25]
+   |
+   v
+QUANT (deterministic: de-vigged edge, net EV,
+       fractional Kelly stake, venue fee model)
+   |
+   v
+RISK GATE (can veto everything below)
+   |
+   v
+VERDICT WRITER -&gt; ledger row: PLAY or PASS, side, price,
+                  P(true), edge, unit size, lane &quot;claude&quot;
+   |
+   v
+GRADING after settlement: won / lost / void</pre>
+<p>Each role earns its place. The scout is cheap and deterministic so the model never picks its own battles. The advocates must work through six fixed signal groups (match state, situational psychology, history, tactics, market microstructure, context) and write "no signal" rather than silently skip one. The synthesizer has to flag which signal group the advocates split on. The quant stage is a curl to an edge calculator; the model never does Kelly math by hand. The risk gate enforces rules it did not invent: net EV at or below zero converts any PLAY to a PASS regardless of narrative, correlated exposure across related tickets caps at 1.5 units, and every PLAY must pass a sanity line stating the market's most likely single scenario and confirming the ticket wins in it. Disciplined PASSes get written to the ledger too, because a good pass is a decision worth grading.</p>
+<p>One honesty rail up front: this system is advisory only. It writes PLAY or PASS rows to a ledger. It never placed a bet, never touched execution, and never ran on a schedule. Any real placement was a human decision made by hand.</p>
+<h2>The two-lane experiment</h2>
+<p>To grade it I ran two lanes on the same markets: a "claude" lane for the committee's verdicts and a "ces" lane for my own picks, logged with the same fields. The ledger holds 14 verdicts from the World Cup knockout rounds. Of those, 10 settled won or lost, 2 were voided by early cashouts, and 2 stayed open or unconfirmed.</p>
+<p>The claude lane graded 4 wins and 4 losses on 8 settled verdicts. My lane graded 1 win and 1 loss on 2. Stakes were tracked in units, half unit or full unit by conviction, not dollars. And to be blunt about it: n=8 and n=2 prove nothing about either lane's skill. A coin flips 4 and 4 too. What the tiny sample did buy me was texture. The committee's losses were auditable in a way gut losses never are. The single worst call, a France minus 1.5 handicap, lost in exactly the scenario the same writeup called most likely, a 1-0 France win. That contradiction was sitting in the thesis text before kickoff. Nobody caught it because the sanity line rule did not exist yet. It exists now because that loss was on the record.</p>
+<h2>What the graded ledger taught me</h2>
+<p>Twelve lessons came out of grading. The four that changed the system:</p>
+<ol><li><strong>A ticket must win in its own most likely scenario.</strong> The France loss, above. The fix is mechanical: before any PLAY, state the score that makes the ticket win. This became a hard risk gate check, not a suggestion.</li><li><strong>Confidence in the pick is not edge.</strong> Being probably right about the winner is worthless if the price already says so. A bet only exists when your probability beats the de-vigged fair number at the venue you can actually get. Calibration beats confidence, and the quant stage enforces it by refusing any PLAY with non-positive net EV.</li><li><strong>Ban transitive logic.</strong> My own worst loss came from "A beat B, B beat C, so A beats C" reasoning on a sentiment pick the model explicitly pushed back on. Single match results are noisy enough that the same tournament produced a three team disproving loop. This is now a standing rule injected into every advocate prompt.</li><li><strong>Size to conviction, mechanically.</strong> Full unit only for a quantified price edge with tight advocate agreement; half unit for a plausible but soft thesis; correlated tickets capped at 1.5 units combined. Rules like these are boring, which is why they work when the narrative is exciting.</li></ol>
+<p>The meta-lesson: the lessons file is not a diary. Rules with graded evidence behind them get injected verbatim into the next run's prompts, along with the last ten settled results. The committee reads its own track record before it opines.</p>
+<h2>What transfers to a real IC seat</h2>
+<p>Almost none of this is about sports. Structured bull and bear advocacy before a decision, a synthesizer forced to name the actual crux, a risk function with veto power that narrative cannot override, sizing tied to quantified conviction, and a graded decision ledger where passes count as decisions: that is just IC hygiene, implemented in software, on markets that settle fast enough to learn from. The sample is tiny and the stakes were small, but the loop is real: decide on the record, grade honestly, convert losses into standing rules, and make the next decision under those rules. That loop is what I would bring to a seat at the table.</p></article></main>
+<footer class="footer"><div class="footer-inner">
+<p>Every desk on this site is paper only. No real trading profits are claimed anywhere. All data is self-collected from my own logs and public keyless sources. Methodology over outcomes.</p>
+<p class="footer-contact"><a href="mailto:cesalas13@gmail.com">cesalas13@gmail.com</a></p>
+</div></footer>
+</body>
+</html>
